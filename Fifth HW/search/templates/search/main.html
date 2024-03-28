@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+
+        #header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #searchbarimage {
+            display: block;
+            margin: 0 auto 20px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        #searchbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            overflow: hidden;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #searchbartext {
+            flex: 1;
+            border: none;
+            padding: 20px;
+            font-size: 24px;
+            outline: none;
+        }
+
+        #searchbarbutton {
+            background-color: #00cfff;
+            border: none;
+            padding: 24px;
+            cursor: pointer;
+        }
+
+        #searchbarbutton svg {
+            height: 25px;
+            width: 25px;
+            fill: #fff;
+        }
+
+        #searchbarbutton:focus {
+            outline: none;
+        }
+
+        #searchresultsarea {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        #searchresultsnumber {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .searchresult {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .searchresult h2 {
+            font-size: 24px;
+            color: #1d01bd;
+            margin: 0 16px 10px 0;
+            overflow: hidden;
+        }
+
+        .searchresult a {
+            font-size: 18px;
+            color: #00d3ff;
+            text-decoration: none;
+        }
+
+        .searchresult p {
+            font-size: 16px;
+            color: #525252;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+            <div id="topbar">
+                <img id="searchbarimage"
+                     src="https://kpfu.ru/portal/docs/F_1017232861/logo.itis.jpg"/>
+                <form action="" method="GET">
+                    <div id="searchbar" type="text">
+                        <input autofocus id="searchbartext" type="text" name="q" value="{{ query }}"/>
+                        <button id="searchbarbutton" type="submit">
+                            <svg focusable="false"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24">
+                                <path
+                                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="optionsbar"></div>
+        </div>
+    <div id="searchresultsarea">
+        <p id="searchresultsnumber">Найдено {{ files|length }} результатов</p>
+        {% for file in files %}
+            <div class="searchresult">
+                <h2><a href="{{ file.0 }}" target="_blank" rel="noopener noreferrer">{{ file.0 }}</a></h2>
+                <h3>{{ file.1 }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
